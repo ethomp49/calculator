@@ -15,17 +15,22 @@ function multiply(a, b) {
 }
 
 function calculate(a, b, operator) {
+    const operation = getOperation(operator);
+    return operation(a, b);
+}
+
+function getOperation(operator) {
     switch (operator) {
         case "+":
-            return add(a, b);
+            return add;
 
         case "-":
-            return subtract(a, b);
+            return subtract;
 
         case "/":
-            return divide(a, b);
+            return divide;
 
         case "*":
-            return multiply(a, b);
+            return multiply;
     }
 }
