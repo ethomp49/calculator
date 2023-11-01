@@ -1,4 +1,4 @@
-document.querySelector(".num-buttons").addEventListener("click", buttonEventHandler);
+document.querySelector(".num-buttons").addEventListener("click", (e) => buttonEventHandler(e));
 
 function add(a, b) {
     return a + b;
@@ -38,7 +38,17 @@ function getOperation(operator) {
 }
 
 function buttonEventHandler(e) {
-    switch (e.target.id) {
+    const button = e.target;
+    const buttonFunction = getButtonFunction(button.id);
+    if (!(buttonFunction === undefined)) {
+        buttonFunction(button.id);
+    }
+}
+
+
+
+function getButtonFunction(id) {
+    switch (id) {
         case "0":
         case "1":
         case "2":
@@ -49,17 +59,51 @@ function buttonEventHandler(e) {
         case "7":
         case "8":
         case "9":
+            return giveNumber;
+
         case ".":
-            console.log("number");
-            break;
+            return giveDecimal;
+
         case "/":
         case "*":
         case "-":
         case "+":
-            console.log("operator");
-            break;
+            return giveOperator;
+
         case "=":
-            console.log("equals");
-            break;
+            return giveEquals;
     }
+}
+
+function giveNumber(number) {
+    const currentInput = getDisplayInput();
+    const newInput = (currentInput !== '0') ? 
+        currentInput + number :
+        number;
+    setDisplayInput(newInput);        
+}
+
+function giveOperator(operator) {
+    const currentInput = getDisplayInput();
+    const newInput = (currentInput.search(/[-+/*]/) === -1) ?
+        currentInput + ` ${operator} ` :
+        currentInput.replace(/[-+/*]/, operator);
+
+    setDisplayInput(newInput);
+}
+
+function giveDecimal() {
+
+}
+
+function giveEquals() {
+
+}
+
+function getDisplayInput() {
+    return document.querySelector(".input-display").textContent;
+}
+
+function setDisplayInput(input) {
+    document.querySelector(".input-display").textContent = input;
 }
