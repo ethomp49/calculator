@@ -89,17 +89,11 @@ function giveNumber(currentInput, number) {
 }
 
 function giveOperator(currentInput, operator) {
-    let newInput;
-
-    if (hasOperator(currentInput)) {
-        const result = giveEquals(currentInput);
-        newInput = (result === "Error") ?
+    const result = giveEquals(currentInput);
+    let newInput = (result === "Error") ?
             '':
             result + ` ${operator} `;
-        setResultDisplay('');
-    } else {
-        newInput = currentInput + ` ${operator} `;
-    }
+    setResultDisplay('');
     setInputDisplay(newInput);
 }
 
