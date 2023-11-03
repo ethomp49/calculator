@@ -1,4 +1,6 @@
-document.querySelector(".buttons").addEventListener("click", (e) => buttonEventHandler(e));
+document.querySelector(".buttons").addEventListener("click", (e) => buttonEventHandler(e.target));
+
+document.addEventListener("keydown", (e) => keyEventHandler(e.key));
 
 function add(a, b) {
     return a + b;
@@ -43,8 +45,16 @@ function getOperation(operator) {
     }
 }
 
-function buttonEventHandler(e) {
-    const button = e.target;
+function keyEventHandler(key) {
+    const buttonFunction = getButtonFunction(key);
+    if (!(buttonFunction === undefined)) {
+        const input = getInputDisplay();
+        buttonFunction(input, key);
+    }
+}
+
+function buttonEventHandler(target) {
+    const button = target;
     const buttonFunction = getButtonFunction(button.id);
     if (!(buttonFunction === undefined)) {
         const input = getInputDisplay();
@@ -75,7 +85,7 @@ function getButtonFunction(id) {
         case "+":
             return giveOperator;
 
-        case "=":
+        case "Enter":
             return giveEquals;
 
         case "clear":
