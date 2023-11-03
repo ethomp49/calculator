@@ -89,7 +89,7 @@ function giveNumber(currentInput, number) {
 }
 
 function giveOperator(currentInput, operator) {
-    const result = giveEquals(currentInput);
+    const result = calcResult(currentInput);
     let newInput = (result === "Error") ?
             '':
             result + ` ${operator} `;
