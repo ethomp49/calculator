@@ -1,4 +1,4 @@
-document.querySelector(".input-buttons").addEventListener("click", (e) => buttonEventHandler(e));
+document.querySelector(".buttons").addEventListener("click", (e) => buttonEventHandler(e));
 
 function add(a, b) {
     return a + b;
@@ -77,6 +77,9 @@ function getButtonFunction(id) {
 
         case "=":
             return giveEquals;
+
+        case "clear":
+            return clearDisplay;
     }
 }
 
@@ -175,4 +178,9 @@ function calcResult(input) {
         return calculate(a, b, op);
     }
     return a;
+}
+
+function clearDisplay() {
+    setInputDisplay('');
+    setResultDisplay('');
 }
