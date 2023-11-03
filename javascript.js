@@ -85,10 +85,12 @@ function getButtonFunction(id) {
         case "+":
             return giveOperator;
 
+        case "=":
         case "Enter":
             return giveEquals;
 
         case "clear":
+        case "Escape":
             return clearDisplay;
     }
 }
