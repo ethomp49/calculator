@@ -104,8 +104,11 @@ function giveOperator(currentInput, operator) {
         } else {
             const a = parseFloat(getA(currentInput))
                 , b = parseFloat(getB(currentInput))
-                , op = getOperator(currentInput);   
-            newInput = calculate(a, b, op) + ` ${operator} `;
+                , op = getOperator(currentInput);
+            const result = calculate(a, b, op);
+            newInput = (result === "Error") ?
+            '' :
+            result + ` ${operator} `;
         }
     } else {
         newInput = currentInput + ` ${operator} `;
