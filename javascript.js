@@ -9,20 +9,22 @@ function subtract(a, b) {
 }
 
 function divide(a, b) {
+    if (b === 0) {
+        return "Error";
+    }
     return a / b;
 }
 
 function multiply(a, b) {
-    if (b === 0) {
-        return "Error";
-    }
-
     return a * b;
 }
 
 function calculate(a, b, operator) {
     const operation = getOperation(operator);
-    return Math.round(operation(a, b) * 1000) / 1000;
+    const result = operation(a,b);
+    return (result === "Error") ?
+        result :
+        Math.round(result * 1000) / 1000;
 }
 
 function getOperation(operator) {
@@ -92,8 +94,8 @@ function giveOperator(currentInput, operator) {
     if (hasResult()) {
         const result = getResult();
         newInput = (result === "Error") ?
-        '' :
-        result + ` ${operator} `;
+            '' :
+            result + ` ${operator} `;
         setResultDisplay('');
     } else if (hasOperator(currentInput)) {  //case: "38 * "
         if (lastNumber(currentInput) === '') {
