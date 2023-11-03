@@ -91,17 +91,17 @@ function giveNumber(currentInput, number) {
 function giveOperator(currentInput, operator) {
     let newInput;
 
-    if (hasResult()) {
+    if (hasResult()) { //ex: "38 * 9 = 342"
         const result = getResult();
         newInput = (result === "Error") ?
             '' :
             result + ` ${operator} `;
         setResultDisplay('');
-    } else if (hasOperator(currentInput)) {  //case: "38 * "
+    } else if (hasOperator(currentInput)) {  //ex: "38 * "
         if (lastNumber(currentInput) === '') {
             newInput = currentInput.replace(
                 getOperator(currentInput), operator);
-        } else {
+        } else { //ex: "38 * 9"
             const result = calcResult(currentInput);
             newInput = (result === "Error") ?
             '' :
@@ -183,8 +183,11 @@ function calcResult(input) {
     if (hasOperator(input)) {    
         const b = parseFloat(getB(input));
         const op = getOperator(input);
+        if (isNaN(b)) { //ex: "38 * ''"
+            return a;
+        }
+
         return calculate(a, b, op);
-    } else {
-        return a;
     }
+    return a;
 }
