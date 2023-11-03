@@ -51,6 +51,11 @@ ul {
 
 .input-display {
     font-size: 24px;
+    text-align: right;
+    max-width: 100%;
+    text-overflow: clip;
+    text-wrap: nowrap;
+    overflow: hidden;
 }
 
 .buttons {
@@ -63,4 +68,6 @@ ul {
 
 .result-display {
     font-size: 32px;
+    text-overflow: clip;
+    overflow: hidden;
 }
