@@ -1,6 +1,6 @@
-document.querySelector(".buttons").addEventListener("click", (e) => buttonEventHandler(e.target));
+document.querySelector(".buttons").addEventListener("click", (e) => eventHandler(e.target.id));
 
-document.addEventListener("keydown", (e) => keyEventHandler(e.key));
+document.addEventListener("keydown", (e) => eventHandler(e.key));
 
 function add(a, b) {
     return a + b;
@@ -45,20 +45,11 @@ function getOperation(operator) {
     }
 }
 
-function keyEventHandler(key) {
-    const buttonFunction = getButtonFunction(key);
+function eventHandler(e) {
+    const buttonFunction = getButtonFunction(e);
     if (!(buttonFunction === undefined)) {
         const input = getInputDisplay();
-        buttonFunction(input, key);
-    }
-}
-
-function buttonEventHandler(target) {
-    const button = target;
-    const buttonFunction = getButtonFunction(button.id);
-    if (!(buttonFunction === undefined)) {
-        const input = getInputDisplay();
-        buttonFunction(input, button.id);
+        buttonFunction(input, e);
     }
 }
 
@@ -98,9 +89,10 @@ function getButtonFunction(id) {
 function giveNumber(currentInput, number) {
     if (hasResult()) {
         setResultDisplay('');
+        setInputDisplay(number);
+    } else {
+        setInputDisplay(currentInput + number);
     }
-
-    setInputDisplay(currentInput + number);        
 }
 
 function giveOperator(currentInput, operator) {
