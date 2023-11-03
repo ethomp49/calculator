@@ -91,22 +91,12 @@ function giveNumber(currentInput, number) {
 function giveOperator(currentInput, operator) {
     let newInput;
 
-    if (hasResult()) { //ex: "38 * 9 = 342"
-        const result = getResult();
+    if (hasOperator(currentInput)) {
+        const result = giveEquals(currentInput);
         newInput = (result === "Error") ?
-            '' :
+            '':
             result + ` ${operator} `;
         setResultDisplay('');
-    } else if (hasOperator(currentInput)) {  //ex: "38 * "
-        if (lastNumber(currentInput) === '') {
-            newInput = currentInput.replace(
-                getOperator(currentInput), operator);
-        } else { //ex: "38 * 9"
-            const result = calcResult(currentInput);
-            newInput = (result === "Error") ?
-            '' :
-            result + ` ${operator} `;
-        }
     } else {
         newInput = currentInput + ` ${operator} `;
     }
@@ -127,6 +117,7 @@ function giveDecimal(currentInput) {
 function giveEquals(input) {
     const result = calcResult(input);
     setResultDisplay(`= ${result}`);
+    return result;
 }
 
 function getInputDisplay() {
