@@ -102,10 +102,7 @@ function giveOperator(currentInput, operator) {
             newInput = currentInput.replace(
                 getOperator(currentInput), operator);
         } else {
-            const a = parseFloat(getA(currentInput))
-                , b = parseFloat(getB(currentInput))
-                , op = getOperator(currentInput);
-            const result = calculate(a, b, op);
+            const result = calcResult(currentInput);
             newInput = (result === "Error") ?
             '' :
             result + ` ${operator} `;
@@ -128,15 +125,7 @@ function giveDecimal(currentInput) {
 }
 
 function giveEquals(input) {
-    const a = parseFloat(getA(input));
-    let result;
-    if (hasOperator(input)) {
-        const b = parseFloat(getB(input));
-        const op = getOperator(input);
-        result = calculate(a, b, op);
-    } else {
-        result = a;
-    }
+    const result = calcResult(input);
     setResultDisplay(`= ${result}`);
 }
 
@@ -187,4 +176,15 @@ function noDecimal(input) {
 function lastNumber(input) {
     const pieces = input.split(" ");
     return pieces[pieces.length - 1];
+}
+
+function calcResult(input) {
+    const a = parseFloat(getA(input));
+    if (hasOperator(input)) {    
+        const b = parseFloat(getB(input));
+        const op = getOperator(input);
+        return calculate(a, b, op);
+    } else {
+        return a;
+    }
 }
