@@ -13,6 +13,10 @@ function divide(a, b) {
 }
 
 function multiply(a, b) {
+    if (b === 0) {
+        return "Error";
+    }
+
     return a * b;
 }
 
@@ -86,7 +90,10 @@ function giveOperator(currentInput, operator) {
     let newInput;
 
     if (hasResult()) {
-        newInput = getResult() + ` ${operator} `;
+        const result = getResult();
+        newInput = (result === "Error") ?
+        '' :
+        result + ` ${operator} `;
         setResultDisplay('');
     } else if (hasOperator(currentInput)) {  //case: "38 * "
         if (lastNumber(currentInput) === '') {
