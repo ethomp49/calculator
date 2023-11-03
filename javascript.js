@@ -1,4 +1,4 @@
-document.querySelector(".buttons").addEventListener("click", (e) => buttonEventHandler(e));
+document.querySelector(".input-buttons").addEventListener("click", (e) => buttonEventHandler(e));
 
 function add(a, b) {
     return a + b;
